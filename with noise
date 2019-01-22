@@ -41,7 +41,7 @@ xlabel('A');ylabel('Y1')
 title('Duffing attractor')
 
 [l1,l2] = size(data);
-fid = fopen('data.csv','w+');
+fid = fopen('data.txt','w+');
 for i = 1:l1
 fprintf(fid,'%.30g %.30g \n',data(i,:));
 end
