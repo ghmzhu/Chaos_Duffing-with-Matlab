@@ -40,5 +40,8 @@ plot(A,Y1,'.','MarkerSize',1)
 xlabel('A');ylabel('Y1')
 title('Duffing attractor')
 
-disp(data)
-csvwrite('data',data)
+[l1,l2] = size(data);
+fid = fopen('data.csv','w+');
+for i = 1:l1
+fprintf(fid,'%.30g %.30g \n',data(i,:));
+end
