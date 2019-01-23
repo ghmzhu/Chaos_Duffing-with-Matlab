@@ -1,0 +1,41 @@
+clc
+clear all
+close all
+
+% x(n+1) = y(n);  
+% y(n+1) = -b * x(n) + a * y(n) -y(n)^3
+
+a0 = 2;
+b = 0.15;
+t = 1e-4;
+
+x0 = 0;
+y0 = 0;
+
+k1 = 1500;              
+k2 = 6000;                  
+
+data = zeros(k1+k2,2);
+for i = 1:k1+k2
+    x = y0;
+    x1 = awgn(x,30);
+    y = -b * x0 + a0 * y0 -y0^3;
+    y1 = awgn(y,30);
+    a = a0 + t;
+    x0 = x1;
+    y0 = y1;
+    a0 = a;
+    
+    data(i,1) = y1;
+    data(i,2) = a;
+end
+data = data(k1+1:end,:);
+
+
+Y1 = data(:,1);
+A = data(:,2);
+
+figure(1)
+plot(A,Y1,'.','MarkerSize',1)
+xlabel('A');ylabel('Y1')
+title('Duffing attractor')
